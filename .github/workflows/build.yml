@@ -44,6 +44,7 @@ jobs:
       - name: Build image
         uses: home-assistant/builder/actions/build-image@2026.06.0
         with:
+          context: ./Squeezelite
           arch: ${{ matrix.arch }}
           container-registry-password: ${{ secrets.GITHUB_TOKEN }}
           image: ${{ matrix.image }}
