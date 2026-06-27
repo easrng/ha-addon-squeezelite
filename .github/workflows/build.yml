@@ -18,17 +18,52 @@ jobs:
       addons: ${{ steps.discover.outputs.addons }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0  # Required to access commit history for git diff
       
-      - name: Discover add-ons
+      - name: Discover changed add-ons
         id: discover
         run: |
-          # Find all top-level directories (ignoring hidden ones starting with a dot)
-          ADDONS=$(find . -mindepth 1 -maxdepth 1 -type d ! -name '.*' -exec basename {} \; | jq -R -s -c 'split("\n")[:-1]')
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "Manual trigger: building all add-ons."
+            ADDONS=$(find . -mindepth 1 -maxdepth 1 -type d ! -name '.*' -exec basename {} \; | jq -R -s -c 'split("\n")[:-1]')
+          else
+            echo "Push event: identifying changed directories..."
+            
+            # Compare the commit before the push to the current commit
+            # (Fallback to comparing HEAD~1 if it's a new branch with a 000000 base)
+            if [ "${{ github.event.before }}" = "0000000000000000000000000000000000000000" ]; then
+              CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD 2>/dev/null || echo "")
+            else
+              CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
+            fi
+            
+            # Extract top-level directories, get unique list
+            TOP_LEVEL_DIRS=$(echo "$CHANGED_FILES" | awk -F/ '{print $1}' | sort -u)
+            
+            VALID_ADDONS=()
+            for dir in $TOP_LEVEL_DIRS; do
+              # Ensure it is currently a directory (not deleted) and doesn't start with '.' (like .github)
+              if [ -d "$dir" ] && [[ ! "$dir" == .* ]]; then
+                VALID_ADDONS+=("$dir")
+              fi
+            done
+            
+            # Format as JSON array for the matrix
+            if [ ${#VALID_ADDONS[@]} -eq 0 ]; then
+              ADDONS="[]"
+            else
+              ADDONS=$(printf '%s\n' "${VALID_ADDONS[@]}" | jq -R -s -c 'split("\n")[:-1]')
+            fi
+          fi
+          
+          echo "Discovered add-ons to build: $ADDONS"
           echo "addons=$ADDONS" >> "$GITHUB_OUTPUT"
 
   build:
     name: Build ${{ matrix.addon }} (${{ matrix.arch }})
     needs: init
+    if: needs.init.outputs.addons != '[]'  # Skip if no add-on folders changed
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -58,6 +93,7 @@ jobs:
   manifest:
     name: Publish manifest for ${{ matrix.addon }}
     needs: [init, build]
+    if: needs.init.outputs.addons != '[]'  # Skip if no add-on folders changed
     runs-on: ubuntu-latest
     permissions:
       id-token: write
