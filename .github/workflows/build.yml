@@ -38,7 +38,7 @@ jobs:
       fail-fast: false
       matrix:
         addon: ${{ fromJSON(needs.check.outputs.addons) }}
-        arch: ${{ fromJSON(env.ARCHITECTURES) }}
+        arch: ["amd64"]
         os: ["ubuntu-latest"]
     steps:
       - uses: actions/checkout@v6
