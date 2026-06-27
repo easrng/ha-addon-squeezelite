@@ -1,5 +1,5 @@
 name: "Wyoming gTTS"
-version: "0.0.1"
+version: "0.0.22"
 slug: "wyoming_gtts"
 description: "Local Google TTS using the Wyoming protocol"
 image: ghcr.io/easrng/{arch}-ha-addon-wyoming_gtts
