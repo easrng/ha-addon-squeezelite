@@ -1,0 +1,23 @@
+name: "Wyoming gSTT"
+version: "0.0.1"
+slug: "wyoming_gstt"
+description: "Local Google STT using the Wyoming protocol"
+image: ghcr.io/easrng/{arch}-ha-addon-wyoming_gstt
+init: false
+arch:
+  - amd64
+  - aarch64
+map:
+  - share:rw
+options:
+  language: "en-US"
+  port: 15001
+  data_dir: "/share/wyoming_gstt"
+schema:
+  language: str
+  port: port
+  data_dir: str
+ports:
+  15001/tcp: 15001
+ports_description:
+  15001/tcp: "Wyoming Protocol Port"
