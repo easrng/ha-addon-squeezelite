@@ -1,70 +1,35 @@
 name: Build Add-ons
 on:
   push:
-    branches:
-      - master
-  workflow_dispatch:  # Allow manual triggers
+  workflow_dispatch:
+
+env:
+  ARCHITECTURES: '["amd64"]'
 
 permissions:
   contents: read
-  packages: write  # Required to push to GHCR
-  id-token: write  # Required for Cosign signing
+  packages: write
+  id-token: write
 
 jobs:
-  init:
-    name: Initialize build
+  check:
+    name: Check for missing images
     runs-on: ubuntu-latest
     outputs:
-      addons: ${{ steps.discover.outputs.addons }}
+      addons: ${{ steps.check.outputs.addons }}
     steps:
       - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
         with:
-          fetch-depth: 0  # Required to access commit history for git diff
-      
-      - name: Discover changed add-ons
-        id: discover
-        run: |
-          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
-            echo "Manual trigger: building all add-ons."
-            ADDONS=$(find . -mindepth 1 -maxdepth 1 -type d ! -name '.*' -exec basename {} \; | jq -R -s -c 'split("\n")[:-1]')
-          else
-            echo "Push event: identifying changed directories..."
-            
-            # Compare the commit before the push to the current commit
-            # (Fallback to comparing HEAD~1 if it's a new branch with a 000000 base)
-            if [ "${{ github.event.before }}" = "0000000000000000000000000000000000000000" ]; then
-              CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD 2>/dev/null || echo "")
-            else
-              CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
-            fi
-            
-            # Extract top-level directories, get unique list
-            TOP_LEVEL_DIRS=$(echo "$CHANGED_FILES" | awk -F/ '{print $1}' | sort -u)
-            
-            VALID_ADDONS=()
-            for dir in $TOP_LEVEL_DIRS; do
-              # Ensure it is currently a directory (not deleted) and doesn't start with '.' (like .github)
-              if [ -d "$dir" ] && [[ ! "$dir" == .* ]]; then
-                VALID_ADDONS+=("$dir")
-              fi
-            done
-            
-            # Format as JSON array for the matrix
-            if [ ${#VALID_ADDONS[@]} -eq 0 ]; then
-              ADDONS="[]"
-            else
-              ADDONS=$(printf '%s\n' "${VALID_ADDONS[@]}" | jq -R -s -c 'split("\n")[:-1]')
-            fi
-          fi
-          
-          echo "Discovered add-ons to build: $ADDONS"
-          echo "addons=$ADDONS" >> "$GITHUB_OUTPUT"
+          node-version: 20
+      - id: check
+        run: node .github/workflows/scripts/get-latest-tags.cjs >> "$GITHUB_OUTPUT"
 
   build:
-    name: Build ${{ matrix.addon }} (${{ matrix.arch }})
-    needs: init
-    if: needs.init.outputs.addons != '[]'  # Skip if no add-on folders changed
-    runs-on: ubuntu-latest
+    name: Build ${{ matrix.addon.dir }} (${{ matrix.arch }})
+    needs: check
+    if: needs.check.outputs.addons != '[]' && needs.check.outputs.addons != ''
+    runs-on: ${{ matrix.os }}
     permissions:
       contents: read
       id-token: write
@@ -72,28 +37,28 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        addon: ${{ fromJSON(needs.init.outputs.addons) }}
-        arch: ["amd64"]
+        addon: ${{ fromJSON(needs.check.outputs.addons) }}
+        arch: ${{ fromJSON(env.ARCHITECTURES) }}
+        os: ["ubuntu-latest"]
     steps:
       - uses: actions/checkout@v6
-      
       - name: Build image
         uses: home-assistant/builder/actions/build-image@2026.06.0
         with:
-          context: ./${{ matrix.addon }}
+          context: ./${{ matrix.addon.dir }}
           arch: ${{ matrix.arch }}
           container-registry-password: ${{ secrets.GITHUB_TOKEN }}
-          image: ghcr.io/${{ github.repository_owner }}/${{ matrix.arch }}-ha-addon-${{ matrix.addon }}
+          image: ghcr.io/easrng/ha-addon-${{ matrix.addon.dir }}
           image-tags: |
+            ${{ matrix.addon.version }}
             latest
-            ${{ github.sha }}
           push: "true"
-          version: latest
+          version: ${{ matrix.addon.version }}
 
   manifest:
-    name: Publish manifest for ${{ matrix.addon }}
-    needs: [init, build]
-    if: needs.init.outputs.addons != '[]'  # Skip if no add-on folders changed
+    name: Publish manifest for ${{ matrix.addon.dir }}
+    needs: [check, build]
+    if: needs.check.outputs.addons != '[]' && needs.check.outputs.addons != ''
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -101,14 +66,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        addon: ${{ fromJSON(needs.init.outputs.addons) }}
+        addon: ${{ fromJSON(needs.check.outputs.addons) }}
     steps:
       - name: Publish multi-arch manifest
         uses: home-assistant/builder/actions/publish-multi-arch-manifest@2026.06.0
         with:
-          architectures: '["amd64"]'
+          architectures: ${{ env.ARCHITECTURES }}
           container-registry-password: ${{ secrets.GITHUB_TOKEN }}
-          image-name: ha-addon-${{ matrix.addon }}
+          image-name: ha-addon-${{ matrix.addon.dir }}
           image-tags: |
+            ${{ matrix.addon.version }}
             latest
-            ${{ github.sha }}
