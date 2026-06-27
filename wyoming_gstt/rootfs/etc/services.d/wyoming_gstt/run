@@ -19,7 +19,7 @@ fi
 cd /app
 
 # Run the Wyoming service
-exec "${DATA_DIR}/ld-linux.so"
+exec "${DATA_DIR}/ld-linux.so" \
     "$(command -v python3)" -m wyoming_gstt \
     --language "${LANGUAGE}" \
     --data-dir "${DATA_DIR}" \
