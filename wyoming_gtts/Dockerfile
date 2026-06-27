@@ -5,13 +5,10 @@ RUN apt-get update && apt-get install -y \
     python3 \
     python3-venv \
     python3-pip \
-    git \
     libc++1 \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
-
-RUN git clone https://github.com/goddade/wyoming_gtts.git .
 
 RUN python3 -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"

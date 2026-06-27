@@ -1,0 +1,370 @@
+{
+  "en-US-hol-female": {
+    "key": "en-US-hol-female",
+    "name": "en-US-hol-female",
+    "language": {
+      "code": "en-US",
+      "family": "en",
+      "region": "US",
+      "name_native": "English (United States)",
+      "name_english": "English (United States)",
+      "country_english": "United States"
+    },
+    "quality": "Neural",
+    "num_speakers": 1,
+    "speaker_id_map": {},
+    "aliases": []
+  },
+  "en-US-jmp-male": {
+    "key": "en-US-jmp-male",
+    "name": "en-US-jmp-male",
+    "language": {
+      "code": "en-US",
+      "family": "en",
+      "region": "US",
+      "name_native": "English (United States)",
+      "name_english": "English (United States)",
+      "country_english": "United States"
+    },
+    "quality": "Neural",
+    "num_speakers": 1,
+    "speaker_id_map": {},
+    "aliases": []
+  },
+  "en-US-sfg-female": {
+    "key": "en-US-sfg-female",
+    "name": "en-US-sfg-female",
+    "language": {
+      "code": "en-US",
+      "family": "en",
+      "region": "US",
+      "name_native": "English (United States)",
+      "name_english": "English (United States)",
+      "country_english": "United States"
+    },
+    "quality": "Neural",
+    "num_speakers": 1,
+    "speaker_id_map": {},
+    "aliases": []
+  },
+  "en-US-tfe-female": {
+    "key": "en-US-tfe-female",
+    "name": "en-US-tfe-female",
+    "language": {
+      "code": "en-US",
+      "family": "en",
+      "region": "US",
+      "name_native": "English (United States)",
+      "name_english": "English (United States)",
+      "country_english": "United States"
+    },
+    "quality": "Neural",
+    "num_speakers": 1,
+    "speaker_id_map": {},
+    "aliases": []
+  },
+  "en-US-tme-male": {
+    "key": "en-US-tme-male",
+    "name": "en-US-tme-male",
+    "language": {
+      "code": "en-US",
+      "family": "en",
+      "region": "US",
+      "name_native": "English (United States)",
+      "name_english": "English (United States)",
+      "country_english": "United States"
+    },
+    "quality": "Neural",
+    "num_speakers": 1,
+    "speaker_id_map": {},
+    "aliases": []
+  },
+  "en-US-iob-female": {
+    "key": "en-US-iob-female",
+    "name": "en-US-iob-female",
+    "language": {
+      "code": "en-US",
+      "family": "en",
+      "region": "US",
+      "name_native": "English (United States)",
+      "name_english": "English (United States)",
+      "country_english": "United States"
+    },
+    "quality": "Neural",
+    "num_speakers": 1,
+    "speaker_id_map": {},
+    "aliases": []
+  },
+  "en-US-iod-male": {
+    "key": "en-US-iod-male",
+    "name": "en-US-iod-male",
+    "language": {
+      "code": "en-US",
+      "family": "en",
+      "region": "US",
+      "name_native": "English (United States)",
+      "name_english": "English (United States)",
+      "country_english": "United States"
+    },
+    "quality": "Neural",
+    "num_speakers": 1,
+    "speaker_id_map": {},
+    "aliases": []
+  },
+  "en-US-iof-male": {
+    "key": "en-US-iof-male",
+    "name": "en-US-iof-male",
+    "language": {
+      "code": "en-US",
+      "family": "en",
+      "region": "US",
+      "name_native": "English (United States)",
+      "name_english": "English (United States)",
+      "country_english": "United States"
+    },
+    "quality": "Neural",
+    "num_speakers": 1,
+    "speaker_id_map": {},
+    "aliases": []
+  },
+  "en-US-iog-female": {
+    "key": "en-US-iog-female",
+    "name": "en-US-iog-female",
+    "language": {
+      "code": "en-US",
+      "family": "en",
+      "region": "US",
+      "name_native": "English (United States)",
+      "name_english": "English (United States)",
+      "country_english": "United States"
+    },
+    "quality": "Neural",
+    "num_speakers": 1,
+    "speaker_id_map": {},
+    "aliases": []
+  },
+  "en-US-ioh-female": {
+    "key": "en-US-ioh-female",
+    "name": "en-US-ioh-female",
+    "language": {
+      "code": "en-US",
+      "family": "en",
+      "region": "US",
+      "name_native": "English (United States)",
+      "name_english": "English (United States)",
+      "country_english": "United States"
+    },
+    "quality": "Neural",
+    "num_speakers": 1,
+    "speaker_id_map": {},
+    "aliases": []
+  },
+  "en-US-ioj-female": {
+    "key": "en-US-ioj-female",
+    "name": "en-US-ioj-female",
+    "language": {
+      "code": "en-US",
+      "family": "en",
+      "region": "US",
+      "name_native": "English (United States)",
+      "name_english": "English (United States)",
+      "country_english": "United States"
+    },
+    "quality": "Neural",
+    "num_speakers": 1,
+    "speaker_id_map": {},
+    "aliases": []
+  },
+  "en-US-iol-male": {
+    "key": "en-US-iol-male",
+    "name": "en-US-iol-male",
+    "language": {
+      "code": "en-US",
+      "family": "en",
+      "region": "US",
+      "name_native": "English (United States)",
+      "name_english": "English (United States)",
+      "country_english": "United States"
+    },
+    "quality": "Neural",
+    "num_speakers": 1,
+    "speaker_id_map": {},
+    "aliases": []
+  },
+  "en-US-iom-male": {
+    "key": "en-US-iom-male",
+    "name": "en-US-iom-male",
+    "language": {
+      "code": "en-US",
+      "family": "en",
+      "region": "US",
+      "name_native": "English (United States)",
+      "name_english": "English (United States)",
+      "country_english": "United States"
+    },
+    "quality": "Neural",
+    "num_speakers": 1,
+    "speaker_id_map": {},
+    "aliases": []
+  },
+  "en-US-iop-female": {
+    "key": "en-US-iop-female",
+    "name": "en-US-iop-female",
+    "language": {
+      "code": "en-US",
+      "family": "en",
+      "region": "US",
+      "name_native": "English (United States)",
+      "name_english": "English (United States)",
+      "country_english": "United States"
+    },
+    "quality": "Neural",
+    "num_speakers": 1,
+    "speaker_id_map": {},
+    "aliases": []
+  },
+  "en-US-tpc-female": {
+    "key": "en-US-tpc-female",
+    "name": "en-US-tpc-female",
+    "language": {
+      "code": "en-US",
+      "family": "en",
+      "region": "US",
+      "name_native": "English (United States)",
+      "name_english": "English (United States)",
+      "country_english": "United States"
+    },
+    "quality": "Neural",
+    "num_speakers": 1,
+    "speaker_id_map": {},
+    "aliases": []
+  },
+  "en-US-tpd-male": {
+    "key": "en-US-tpd-male",
+    "name": "en-US-tpd-male",
+    "language": {
+      "code": "en-US",
+      "family": "en",
+      "region": "US",
+      "name_native": "English (United States)",
+      "name_english": "English (United States)",
+      "country_english": "United States"
+    },
+    "quality": "Neural",
+    "num_speakers": 1,
+    "speaker_id_map": {},
+    "aliases": []
+  },
+  "en-US-tpf-female": {
+    "key": "en-US-tpf-female",
+    "name": "en-US-tpf-female",
+    "language": {
+      "code": "en-US",
+      "family": "en",
+      "region": "US",
+      "name_native": "English (United States)",
+      "name_english": "English (United States)",
+      "country_english": "United States"
+    },
+    "quality": "Neural",
+    "num_speakers": 1,
+    "speaker_id_map": {},
+    "aliases": []
+  },
+  "zh-CN-cca-female": {
+    "key": "zh-CN-cca-female",
+    "name": "zh-CN-cca-female",
+    "language": {
+      "code": "zh-CN",
+      "family": "zh",
+      "region": "CN",
+      "name_native": "简体中文",
+      "name_english": "Chinese",
+      "country_english": "China"
+    },
+    "quality": "Neural",
+    "num_speakers": 1,
+    "speaker_id_map": {},
+    "aliases": []
+  },
+  "zh-CN-ccb-male": {
+    "key": "zh-CN-ccb-male",
+    "name": "zh-CN-ccb-male",
+    "language": {
+      "code": "zh-CN",
+      "family": "zh",
+      "region": "CN",
+      "name_native": "简体中文",
+      "name_english": "Chinese",
+      "country_english": "China"
+    },
+    "quality": "Neural",
+    "num_speakers": 1,
+    "speaker_id_map": {},
+    "aliases": []
+  },
+  "zh-CN-ccc-female": {
+    "key": "zh-CN-ccc-female",
+    "name": "zh-CN-ccc-female",
+    "language": {
+      "code": "zh-CN",
+      "family": "zh",
+      "region": "CN",
+      "name_native": "简体中文",
+      "name_english": "Chinese",
+      "country_english": "China"
+    },
+    "quality": "Neural",
+    "num_speakers": 1,
+    "speaker_id_map": {},
+    "aliases": []
+  },
+  "zh-CN-ccd-male": {
+    "key": "zh-CN-ccd-male",
+    "name": "zh-CN-ccd-male",
+    "language": {
+      "code": "zh-CN",
+      "family": "zh",
+      "region": "CN",
+      "name_native": "简体中文",
+      "name_english": "Chinese",
+      "country_english": "China"
+    },
+    "quality": "Neural",
+    "num_speakers": 1,
+    "speaker_id_map": {},
+    "aliases": []
+  },
+  "zh-CN-cce-male": {
+    "key": "zh-CN-cce-male",
+    "name": "zh-CN-cce-male",
+    "language": {
+      "code": "zh-CN",
+      "family": "zh",
+      "region": "CN",
+      "name_native": "简体中文",
+      "name_english": "Chinese",
+      "country_english": "China"
+    },
+    "quality": "Neural",
+    "num_speakers": 1,
+    "speaker_id_map": {},
+    "aliases": []
+  },
+  "zh-CN-ssa-female": {
+    "key": "zh-CN-ssa-female",
+    "name": "zh-CN-ssa-female",
+    "language": {
+      "code": "zh-CN",
+      "family": "zh",
+      "region": "CN",
+      "name_native": "简体中文",
+      "name_english": "Chinese",
+      "country_english": "China"
+    },
+    "quality": "Neural",
+    "num_speakers": 1,
+    "speaker_id_map": {},
+    "aliases": []
+  }
+}
