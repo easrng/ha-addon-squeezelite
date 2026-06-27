@@ -17,7 +17,10 @@ async function tagExists(repo, tag) {
   const data = await res.json();
 
   if (data.errors) {
-    if (data.errors[0].code === "MANIFEST_UNKNOWN") {
+    if (
+      data.errors[0].code === "MANIFEST_UNKNOWN" ||
+      data.errors[0].code === "DENIED"
+    ) {
       return false;
     } else {
       throw new Error(JSON.stringify(data, null, 2));
