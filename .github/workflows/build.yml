@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
         with:
-          node-version: lts
+          node-version: lts/*
       - id: check
         run: node .github/workflows/scripts/get-latest-tags.cjs >> "$GITHUB_OUTPUT"
 
