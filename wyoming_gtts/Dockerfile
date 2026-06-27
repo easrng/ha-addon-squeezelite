@@ -18,5 +18,3 @@ ENV PATH="/opt/venv/bin:$PATH"
 RUN pip install --no-cache-dir wyoming==1.5.4 protobuf==3.20.3
 
 COPY rootfs /
-
-ENTRYPOINT [ "/run.sh" ]
