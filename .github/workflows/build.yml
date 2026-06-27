@@ -48,7 +48,7 @@ jobs:
           context: ./${{ matrix.addon.dir }}
           arch: ${{ matrix.arch }}
           container-registry-password: ${{ secrets.GITHUB_TOKEN }}
-          image: ghcr.io/easrng/ha-addon-${{ matrix.addon.dir }}
+          image: ghcr.io/easrng/${{ matrix.arch }}-ha-addon-${{ matrix.addon.dir }}
           image-tags: |
             ${{ matrix.addon.version }}
             latest
